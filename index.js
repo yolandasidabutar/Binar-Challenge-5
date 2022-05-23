@@ -10,6 +10,9 @@ const route = require('./route');
 // import middlaware untuk 404 not found
 const middleware = require('./middleware/404');
 
+//import model
+const { user_game, user_game_biodata, user_game_history } = require('./models');
+
 // inisiasi express
 const app = express();
 
@@ -25,6 +28,8 @@ app.set("view engine", "ejs");
 // menerapkan middleware pembaca body
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
+
+
 
 // terapkan route di aplikasi
 app.use(route);

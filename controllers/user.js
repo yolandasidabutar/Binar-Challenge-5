@@ -1,11 +1,11 @@
-users = require("../db/users.json");
+users = require("../db/admin.json");
 
-
-function get(req, res) {
+// untuk cek data admin dari json
+function get(req, res) {                                    
     res.status(200).json(users);
 }
 
-//mendapatkan user per id ex:localhost:8000/user?id=1
+//mendapatkan useradmin per id ex:localhost:8000/user?id=1
 function getById(req, res) {
     const idx = users.findIndex(x => x.id == req.query.id);
     
@@ -20,7 +20,7 @@ function loginIndex(req, res) {
     res.render('login');
 }
 
-function login(req, res) {
+function loginAdmin(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
@@ -31,7 +31,7 @@ function login(req, res) {
         if (users[idx].password != password) {
             res.status(403).json({ message: 'Password salah!'});
         } else {
-           res.status(200).json({ message: 'Login berhasil!' }); 
+           res.status(200).redirect('/dashboard'); 
         }
     }
 }
@@ -40,5 +40,5 @@ module.exports = {
     get,
     getById,
     loginIndex,
-    login
+    loginAdmin,
 }
